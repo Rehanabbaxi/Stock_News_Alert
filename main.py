@@ -1,11 +1,35 @@
+import requests
+from dotenv import load_dotenv
+import os
+from datetime import  datetime
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+load_dotenv()
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
 ## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+
+
+news_api = os.getenv("NEWS_API")
+url= "https://newsapi.org/v2/top-headlines?"
+current_date = datetime.now().date()
+parameters = {"q" : "elon musk ",
+            "country" : "us" ,
+            "sortBy": "popularity",
+            "from": current_date,
+            "to" : current_date,
+            "apiKey" : news_api
+
+            }
+response = requests.get(url=url , params=parameters )
+response.raise_for_status()
+data = response.json()
+print(data)
+
+
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
