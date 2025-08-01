@@ -64,7 +64,7 @@ if abs(difference_perc) > 2 :
         message =  client.messages.create(
             body=article,
             from_="+14708767821",
-            to="+92 315 5504532",
+            to="Your registered phone number",
         )
         print(message.status)
 
